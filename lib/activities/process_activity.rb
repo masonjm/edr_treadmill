@@ -1,3 +1,5 @@
+require "etc"
+
 module EdrTreadmill
   module Activities
     class ProcessActivity
@@ -10,7 +12,7 @@ module EdrTreadmill
         {
           timestamp: Time.now,
           pid: pid,
-          uid: Process.uid,
+          user: Etc.getpwuid(Process.uid).name,
           process_name: @command,
           command_line: "#{@command} #{@args}".strip
         }
