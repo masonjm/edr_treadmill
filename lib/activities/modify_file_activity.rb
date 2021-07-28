@@ -1,9 +1,8 @@
-require "etc"
-require "fileutils"
+require "activities/base_file_activity"
 
 module EdrTreadmill
   module Activities
-    class ModifyFileActivity
+    class ModifyFileActivity < BaseFileActivity
       def initialize(filename:, content_path:)
         @filename = filename
         @content_path = content_path
@@ -11,15 +10,10 @@ module EdrTreadmill
 
       def execute
         append_content
-        {
-          timestamp: Time.now,
-          pid: Process.pid,
-          process_name: $0,
-          command_line: "#{$0} #{ARGV.join(" ")}".strip,
-          user: Etc.getpwuid(Process.uid).name,
+        result(
           path: @filename,
           activity: "modify"
-        }
+        )
       end
 
       private

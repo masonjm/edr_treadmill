@@ -1,9 +1,9 @@
-require "etc"
+require "activities/base_file_activity"
 require "fileutils"
 
 module EdrTreadmill
   module Activities
-    class CreateFileActivity
+    class CreateFileActivity < BaseFileActivity
       def initialize(filename:, source:)
         @filename = filename
         @source = source
@@ -11,15 +11,10 @@ module EdrTreadmill
 
       def execute
         FileUtils.cp(@source, @filename)
-        {
-          timestamp: Time.now,
-          pid: Process.pid,
-          process_name: $0,
-          command_line: "#{$0} #{ARGV.join(" ")}".strip,
-          user: Etc.getpwuid(Process.uid).name,
+        result(
           path: @filename,
           activity: "create"
-        }
+        )
       end
     end
   end
