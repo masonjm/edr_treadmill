@@ -1,21 +1,20 @@
+require "activities/base_activity"
 require "etc"
 
 module EdrTreadmill
   module Activities
-    class ProcessActivity
+    class ProcessActivity < BaseActivity
       def initialize(command:)
         @command, @args = command.split(" ", 2)
       end
 
       def execute
         pid = Process.spawn(@command, @args)
-        {
-          timestamp: Time.now,
+        result(
           pid: pid,
-          user: Etc.getpwuid(Process.uid).name,
           process_name: @command,
           command_line: "#{@command} #{@args}".strip
-        }
+        )
       end
     end
   end

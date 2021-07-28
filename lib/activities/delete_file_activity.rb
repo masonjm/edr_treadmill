@@ -1,9 +1,9 @@
-require "activities/base_file_activity"
+require "activities/base_activity"
 require "fileutils"
 
 module EdrTreadmill
   module Activities
-    class DeleteFileActivity < BaseFileActivity
+    class DeleteFileActivity < BaseActivity
       def initialize(filename:)
         @filename = filename
       end

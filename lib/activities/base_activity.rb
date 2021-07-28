@@ -2,7 +2,7 @@ require "etc"
 
 module EdrTreadmill
   module Activities
-    class BaseFileActivity
+    class BaseActivity
       private
 
         def result(**kwargs)
