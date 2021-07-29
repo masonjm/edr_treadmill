@@ -1,9 +1,9 @@
-require "activities/base_activity"
+require "edr_treadmill/activities/base_activity"
 require "fileutils"
 
 module EdrTreadmill
   module Activities
-    class CreateFileActivity < BaseActivity
+    class FileCreateActivity < BaseActivity
       def initialize(filename:, source:)
         @filename = filename
         @source = source

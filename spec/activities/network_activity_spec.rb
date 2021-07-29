@@ -1,4 +1,4 @@
-require "activities/network_activity"
+require "edr_treadmill/activities/network_activity"
 require "socket"
 
 RSpec.describe EdrTreadmill::Activities::NetworkActivity do

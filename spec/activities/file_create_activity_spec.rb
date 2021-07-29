@@ -1,15 +1,15 @@
-require "activities/create_file_activity"
+require "edr_treadmill/activities/file_create_activity"
 require "tempfile"
 
-RSpec.describe EdrTreadmill::Activities::CreateFileActivity do
+RSpec.describe EdrTreadmill::Activities::FileCreateActivity do
   let(:filename) { "#{Tempfile.new.path}.txt" }
-  let(:source_path) { "spec/fixtures/create_file_source.txt" }
+  let(:source_path) { "spec/fixtures/file_create_source.txt" }
   let(:source_contents) { File.read(source_path) }
 
   after { File.unlink(filename) }
 
   subject do
-    EdrTreadmill::Activities::CreateFileActivity
+    EdrTreadmill::Activities::FileCreateActivity
       .new(filename: filename, source: source_path)
       .execute
   end

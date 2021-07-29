@@ -1,4 +1,4 @@
-require "activities/process_activity"
+require "edr_treadmill/activities/process_activity"
 
 RSpec.describe EdrTreadmill::Activities::ProcessActivity do
   subject do

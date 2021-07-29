@@ -1,9 +1,9 @@
-require "activities/modify_file_activity"
+require "edr_treadmill/activities/file_modify_activity"
 require "tempfile"
 
-RSpec.describe EdrTreadmill::Activities::ModifyFileActivity do
+RSpec.describe EdrTreadmill::Activities::FileModifyActivity do
   let(:filename) { "#{Tempfile.new.path}.txt" }
-  let(:append_path) { "spec/fixtures/modify_file_content.txt" }
+  let(:append_path) { "spec/fixtures/file_modify_content.txt" }
   let(:append_contents) { File.read(append_path) }
   let(:existing_content) do
     "Should you or any of your IM Force be caught or killed"
@@ -13,7 +13,7 @@ RSpec.describe EdrTreadmill::Activities::ModifyFileActivity do
   after { File.unlink(filename) }
 
   subject do
-    EdrTreadmill::Activities::ModifyFileActivity
+    EdrTreadmill::Activities::FileModifyActivity
       .new(filename: filename, content_path: append_path)
       .execute
   end

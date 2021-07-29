@@ -1,4 +1,4 @@
-require "activities/base_activity"
+require "edr_treadmill/activities/base_activity"
 require "etc"
 
 module EdrTreadmill

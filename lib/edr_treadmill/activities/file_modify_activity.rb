@@ -1,8 +1,8 @@
-require "activities/base_activity"
+require "edr_treadmill/activities/base_activity"
 
 module EdrTreadmill
   module Activities
-    class ModifyFileActivity < BaseActivity
+    class FileModifyActivity < BaseActivity
       def initialize(filename:, content_path:)
         @filename = filename
         @content_path = content_path

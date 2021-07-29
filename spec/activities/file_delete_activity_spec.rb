@@ -1,8 +1,8 @@
-require "activities/delete_file_activity"
+require "edr_treadmill/activities/file_delete_activity"
 require "tempfile"
 require "pathname"
 
-RSpec.describe EdrTreadmill::Activities::DeleteFileActivity do
+RSpec.describe EdrTreadmill::Activities::FileDeleteActivity do
   let(:filename) { "#{Tempfile.new.path}.txt" }
   let(:existing_content) do
     "This file will self-destruct in five milliseconds. Good luck."
@@ -12,7 +12,7 @@ RSpec.describe EdrTreadmill::Activities::DeleteFileActivity do
   after { File.unlink(filename) if File.exists?(filename) }
 
   subject do
-    EdrTreadmill::Activities::DeleteFileActivity
+    EdrTreadmill::Activities::FileDeleteActivity
       .new(filename: filename)
       .execute
   end
