@@ -1,7 +1,6 @@
 require "edr_treadmill/version"
 
 module EdrTreadmill
-  class Error < StandardError; end
 end
 
 # require all of the activity implementations

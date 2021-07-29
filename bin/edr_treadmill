@@ -3,8 +3,10 @@
 require "bundler/setup"
 require "edr_treadmill"
 require "thor"
+require "active_support/json"
 require "active_support/core_ext/class/subclasses"
 require "active_support/core_ext/hash/keys"
+require "active_support/core_ext/object/json"
 
 module EdrTreadmill
   class CLI < Thor
@@ -14,7 +16,8 @@ module EdrTreadmill
         method_option(name, **options)
       end
       define_method(activity_class.activity_name) do
-        puts activity_class.new(**options.symbolize_keys).execute
+        results = activity_class.new(**options.symbolize_keys).execute
+        puts results.to_json
       end
     end
 
