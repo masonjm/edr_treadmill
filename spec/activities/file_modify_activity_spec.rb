@@ -14,7 +14,7 @@ RSpec.describe EdrTreadmill::Activities::FileModifyActivity do
 
   subject do
     EdrTreadmill::Activities::FileModifyActivity
-      .new(filename: filename, content_path: append_path)
+      .new(filename: filename, source: append_path)
       .execute
   end
 

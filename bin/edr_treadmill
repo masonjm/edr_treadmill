@@ -4,31 +4,27 @@ require "bundler/setup"
 require "edr_treadmill"
 require "thor"
 require "active_support/core_ext/class/subclasses"
+require "active_support/core_ext/hash/keys"
 
 module EdrTreadmill
   class CLI < Thor
     def self.define_activity(activity_class)
-      name = activity_class.name.demodulize.underscore.sub(/_activity$/, "")
-
-      desc "edr_treadmill #{name}", "Description of activity"
-      define_method(name) do
-        puts "Did a thing"
+      desc(activity_class.activity_name, activity_class.activity_description)
+      activity_class.activity_options.each do |name, options|
+        method_option(name, **options)
       end
+      define_method(activity_class.activity_name) do
+        puts activity_class.new(**options.symbolize_keys).execute
+      end
+    end
+
+    def self.exit_on_failure?
+      true
     end
   end
 end
 
-class ActivitiesMetadata
-  def classes
-    EdrTreadmill::Activities::BaseActivity.subclasses
-  end
-
-  def activity_names
-    classes.map(&:activity_name)
-  end
-end
-
-ActivitiesMetadata.new.classes.each do |activity_class|
+EdrTreadmill::Activities::BaseActivity.subclasses.each do |activity_class|
   EdrTreadmill::CLI.define_activity(activity_class)
 end
 

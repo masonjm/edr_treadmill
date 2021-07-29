@@ -1,8 +1,35 @@
+require "socket"
 require "edr_treadmill/activities/base_activity"
 
 module EdrTreadmill
   module Activities
     class NetworkActivity < BaseActivity
+      self.activity_description = "Send packets to HOST on PORT"
+      self.activity_options = {
+        host: {
+          required: true,
+          type: :string,
+          desc: "Hostname or IP address of destination for network packets"
+        },
+        port: {
+          required: true,
+          type: :numeric,
+          desc: "IP port on HOST"
+        },
+        protocol: {
+          required: true,
+          type: :string,
+          enum: %w[tcp udp],
+          default: "udp",
+          desc: "IP protocol for generated traffic"
+        },
+        content: {
+          required: true,
+          type: :string,
+          desc: "Bytes to send to HOST"
+        }
+      }
+
       def initialize(host:, port:, protocol:, content:)
         @host     = host
         @port     = port
@@ -43,6 +70,9 @@ module EdrTreadmill
             end
           when "tcp"
             TCPSocket.new(@host, @port)
+          else
+            $stderr.puts "Unknown protocol #{@protocol}"
+            exit(1)
           end
         end
     end

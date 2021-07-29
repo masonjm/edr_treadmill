@@ -3,9 +3,24 @@ require "edr_treadmill/activities/base_activity"
 module EdrTreadmill
   module Activities
     class FileModifyActivity < BaseActivity
-      def initialize(filename:, content_path:)
+      self.activity_description = "Modify a file by appending the contents of "\
+        "a second file"
+      self.activity_options = {
+        filename: {
+          required: true,
+          type: :string,
+          desc: "Path to the file that will be modified"
+        },
+        source: {
+          required: true,
+          type: :string,
+          desc: "Path to a source file to be appended to FILENAME"
+        }
+      }
+
+      def initialize(filename:, source:)
         @filename = filename
-        @content_path = content_path
+        @source = source
       end
 
       def execute
@@ -19,7 +34,7 @@ module EdrTreadmill
       private
 
         def content
-          File.read(@content_path)
+          File.read(@source)
         end
 
         def append_content

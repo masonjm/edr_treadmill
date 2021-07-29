@@ -1,13 +1,19 @@
 require "etc"
 require "active_support/core_ext/string/inflections"
 require "active_support/core_ext/string/conversions"
+require "active_support/core_ext/class/attribute"
 
 module EdrTreadmill
   module Activities
     class BaseActivity
+      class_attribute :activity_name
       def self.activity_name
         name.demodulize.underscore.sub(/_activity$/, "")
       end
+
+      class_attribute :activity_description, default: ""
+
+      class_attribute :activity_options, default: {}
 
       private
 
