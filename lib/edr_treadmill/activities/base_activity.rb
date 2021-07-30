@@ -13,6 +13,9 @@ module EdrTreadmill
 
       class_attribute :activity_description, default: ""
 
+      # Metadata for Thor to render command-line help.
+      # See https://github.com/rails/thor/wiki/Method-Options for available
+      # options.
       class_attribute :activity_options, default: {}
 
       private
