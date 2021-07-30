@@ -23,11 +23,12 @@ First, clone this repository.
 
 And then install the gem locally:
 
-    $ bundle exec rake install
+    $ bin/setup
+    $ rake install
 
 Verify the gem is installed correctly
 
-    $ bundle exec edr_treadmill help
+    $ edr_treadmill help
 
 
 ## Usage
@@ -36,7 +37,7 @@ The `edr_treadmill` executable provides access to a set of activity commands.
 You can see a list of available activities by running the `edr_treadmill`
 command:
 
-    $ bundle exec edr_treadmill
+    $ edr_treadmill
 
     Commands:
       edr_treadmill file_create --filename=FILENAME --source=SOURCE                     # Create a new file by copying an existing file
@@ -48,7 +49,7 @@ command:
 
 Use the `help` command to get more detailed help about individual activities:
 
-    $ bundle exec edr_treadmill help network
+    $ edr_treadmill help network
 
     Usage:
       edr_treadmill network --content=CONTENT --host=HOST --port=N --protocol=PROTOCOL
@@ -65,7 +66,7 @@ Use the `help` command to get more detailed help about individual activities:
 
 Use a command to generate activity on the system
 
-    $ bundle exec edr_treadmill network --host=example.com --port=80 --content="Verify our range to target"
+    $ edr_treadmill network --host=example.com --port=80 --content="Verify our range to target"
 
     {"timestamp":"2021-01-02T03:04:05.678-09:00","pid":47738,"process_name":"/path/to/ruby/version/bin/edr_treadmill","command_line":"/path/to/ruby/version/bin/edr_treadmill network --host=example.com --port=80 --content=Verify our range to target","user":"masonjm","destination_host":"example.com","destination_port":80,"source_host":"10.11.12.13","source_port":424242,"data_size":26,"protocol":"udp"}
 
